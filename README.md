@@ -36,10 +36,10 @@ $$
 A key property — derived in [notebook 01](notebooks/01-forward-process.ipynb) — is that we can sample $x_t$ directly from $x_0$ without iterating step by step:
 
 $$
-x_t = \sqrt{\bar{\alpha}_t}\, x_0 + \sqrt{1 - \bar{\alpha}_t}\, \epsilon, \quad \epsilon \sim \mathcal{N}(0, I)
+x_t = \sqrt{\bar{\alpha}_t}\, x_0 + \sqrt{1 - \bar{\alpha}_t}\, \epsilon, \quad \epsilon \sim \mathcal{N}(0, I), \quad \bar{\alpha}_t = \prod_{s=1}^{t}(1 - \beta_s)
 $$
 
-where $\bar{\alpha}_t = \prod_{s=1}^{t}(1 - \beta_s)$. This closed form is what makes training tractable.
+This closed form is what makes training tractable.
 
 ### Reverse process
 
