@@ -29,11 +29,8 @@ A diffusion model defines a Markov chain that gradually corrupts an image $x_0$ 
 
 $$
 q(x_t \mid x_{t-1}) =
-\mathcal{N}\left(
-x_t \,;\,
-\sqrt{1-\beta_t}\,x_{t-1},\,
-\beta_t I
-\right)
+\mathcal{N}\left(x_t;\sqrt{\alpha_t}x_{t-1},(1-\alpha_t)I\right),
+\quad \alpha_t = 1-\beta_t
 $$
 
 A key property — derived in [notebook 01](notebooks/01-forward-process.ipynb) — is that we can sample $x_t$ directly from $x_0$ without iterating step by step:
