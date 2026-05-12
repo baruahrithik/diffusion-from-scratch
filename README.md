@@ -101,13 +101,17 @@ diffusion-from-scratch/
 │   └── 04-sampling.ipynb             # Reverse process + sample generation
 ├── src/
 │   ├── __init__.py
-│   └── model.py                      # SinusoidalTimeEmbedding, ResBlock, UNet
+│   ├── model.py                      # SinusoidalTimeEmbedding, ResBlock, UNet
+│   └── diffusion.py                  # Noise schedule, q_sample, p_sample, sample
 ├── weights/
 │   └── ddpm_mnist_weights.pt         # Trained weights (~4 MB)
-├── figures/                          # Result figures used in this README
+├── figures/
 │   ├── denoising_process.png
 │   ├── generated_samples.png
 │   └── training_loss.png
+├── train.py                          # CLI training script
+├── sample.py                         # CLI sampling script
+├── requirements.txt
 ├── LICENSE
 └── README.md
 ```
@@ -118,13 +122,27 @@ The notebooks were developed on Kaggle (free T4 GPU) but will run anywhere with 
 
 **Dependencies:** `torch`, `torchvision`, `matplotlib`. No diffusion-specific libraries.
 
-**To run inference with the included weights:**
+**Install dependencies:**
 
-Open [`notebooks/04-sampling.ipynb`](notebooks/04-sampling.ipynb). The notebook clones this repo, imports `UNet` from `src/model.py`, loads `weights/ddpm_mnist_weights.pt`, and generates samples in ~10 seconds.
+```bash
+pip install -r requirements.txt
+```
 
-**To retrain from scratch:**
+**Run inference with the included weights:**
 
-Open [`notebooks/03-training.ipynb`](notebooks/03-training.ipynb). The notebook trains the U-Net for 30 epochs on MNIST and saves the weights. Training takes ~20 minutes on an NVIDIA T4.
+```bash
+python sample.py --checkpoint weights/ddpm_mnist_weights.pt --n-samples 16
+```
+
+Or open [`notebooks/04-sampling.ipynb`](notebooks/04-sampling.ipynb) for the same with detailed explanations.
+
+**Retrain from scratch:**
+
+```bash
+python train.py --epochs 30
+```
+
+Takes ~20 minutes on an NVIDIA T4. The notebook version is [`notebooks/03-training.ipynb`](notebooks/03-training.ipynb).
 
 For production-scale models, trained weights would normally live on Hugging Face Hub rather than in Git; the weights are included here because the file is small (~4 MB) and makes the project immediately reproducible.
 
