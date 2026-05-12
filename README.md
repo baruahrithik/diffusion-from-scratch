@@ -82,6 +82,14 @@ After 30 epochs the model produces clearly digit-shaped samples — multiple dis
 
 Loss drops sharply in the first few hundred steps (the model quickly learns the average noise distribution), then descends slowly as it learns to predict noise at specific timesteps. Final epoch average MSE loss settles around **0.03**.
 
+## Skills demonstrated
+
+- Derived the closed-form forward process and reverse-step distribution from the DDPM paper
+- Implemented sinusoidal time embeddings, time-conditioned residual blocks, and a U-Net from scratch in PyTorch (no high-level diffusion libraries)
+- Trained an unconditional generative model on MNIST with a 1.1M-parameter U-Net, including loss tracking and weight checkpointing
+- Visualized the forward, reverse, and sampling processes, including a step-by-step reverse-diffusion trajectory
+- Organized the project with reusable Python modules, documented notebooks, and a reproducible setup
+  
 ## Repository structure
 
 ```
